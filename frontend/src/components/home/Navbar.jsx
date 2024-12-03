@@ -3,7 +3,7 @@ import { Navbar } from "flowbite-react";
 
 export function CustomNav() {
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid rounded className="bg-gray-300 h-16 p-4">
       <Navbar.Brand as={Link} href="https://flowbite-react.com">
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span>
       </Navbar.Brand>

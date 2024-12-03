@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import baseUrl from "../api";
 import { toast } from "react-toastify";
+import { HiArrowLeft } from "react-icons/hi";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -58,8 +59,16 @@ export default function Login() {
             />
           </div>
           <Button type="submit">Submit</Button>
-          <div className="flex justify-end">
-            <h2 className="text-gray-400">Already have an account? <Link to="/register" className="text-black">Register</Link></h2>
+          <div className="flex justify-between">
+            <Link to="/">
+              <HiArrowLeft className="text-xl text-blue-500" />
+            </Link>
+            <h2 className="text-gray-400">
+              Already have an account?{" "}
+              <Link to="/register" className="text-black">
+                Register
+              </Link>
+            </h2>
           </div>
         </form>
       </div>
