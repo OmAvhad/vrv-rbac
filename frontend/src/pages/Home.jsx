@@ -1,5 +1,5 @@
 import { CustomNav } from "../components/home/Navbar";
-import axiosInstance from "../config/axiosSetup";
+import axiosInstance from "../config/AxiosSetup";
 import { useEffect, useState } from "react";
 import { Card } from "flowbite-react";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../../config/axiosSetup";
+import axiosInstance from "../../../config/AxiosSetup";
 import { Label, TextInput, Button, Checkbox } from "flowbite-react";
 import { toast } from "react-toastify";
 

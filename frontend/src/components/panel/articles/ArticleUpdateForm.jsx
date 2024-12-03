@@ -1,4 +1,4 @@
-import axiosInstance from "../../../config/axiosSetup";
+import axiosInstance from "../../../config/AxiosSetup";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Label, TextInput, Button } from "flowbite-react";
