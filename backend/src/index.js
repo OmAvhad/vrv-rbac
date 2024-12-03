@@ -2,7 +2,7 @@ import app from "./app.js";
 import { PORT } from "./env.js";
 import { connectDB } from "./db.js";
 
-async function main() {
+(async function main() {
   try {
     await connectDB();
     app.listen(PORT);
@@ -10,6 +10,6 @@ async function main() {
   } catch (error) {
     console.error(error);
   }
-}
+})();
 
-main();
+export default app;
