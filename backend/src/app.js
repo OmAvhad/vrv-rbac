@@ -2,6 +2,10 @@ import express from "express";
 import cors from "cors";
 
 import authRoutes from "./routes/auth-router.js";
+import articleRoutes from "./routes/article-router.js";
+import roleRoutes from "./routes/role-router.js";
+import permissionRoutes from "./routes/permission-router.js";
+import userRoutes from "./routes/user-router.js";
 
 const app = express();
 
@@ -13,5 +17,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/articles", articleRoutes);
+app.use("/api/roles", roleRoutes);
+app.use("/api/permissions", permissionRoutes);
+app.use("/api/users", userRoutes);
 
 export default app;
