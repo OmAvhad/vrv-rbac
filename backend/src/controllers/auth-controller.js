@@ -54,7 +54,10 @@ export async function login(req, res) {
 
 export async function me(req, res) {
   try {
-    const user = await User.findById(req.user.id).select("-password -__v").populate("roles");
+    const user = await User.findById(req.user.id)
+      .select("-password -__v")
+      .populate("roles")
+      .populate("permissions");
     return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: error.message });

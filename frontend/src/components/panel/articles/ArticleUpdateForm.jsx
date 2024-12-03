@@ -17,7 +17,7 @@ export default function ArticleUpdateForm() {
   const [created_at, setCreatedAt] = useState("");
   const [updated_at, setUpdatedAt] = useState("");
 
-  const { hasRole } = useContext(UserContext);
+  const { hasRole, hasPermission } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -118,21 +118,27 @@ export default function ArticleUpdateForm() {
           />
         </div>
         <div className="flex flex-col justify-start mt-6 w-full gap-2 ">
-          {(hasRole("admin") || hasRole("editor")) && (
+          {(hasRole("admin") ||
+            hasRole("editor") ||
+            hasPermission("update_article")) && (
             <>
               <Button type="submit" className="w-2/6" onClick={updateArticle}>
                 Save
               </Button>
-              <Button
-                className="w-2/6 bg-green-600 text-white"
-                onClick={publishArticle}
-              >
-                Publish
-              </Button>
             </>
           )}
+          {(hasRole("admin") ||
+            hasRole("editor") ||
+            hasPermission("publish_article")) && (
+            <Button
+              className="w-2/6 bg-green-600 text-white"
+              onClick={publishArticle}
+            >
+              Publish
+            </Button>
+          )}
 
-          {hasRole("admin") && (
+          {(hasRole("admin") || hasPermission("delete_article")) && (
             <Button
               className="w-2/6 bg-red-800 text-white"
               onClick={deleteArticle}

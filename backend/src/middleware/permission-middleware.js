@@ -9,8 +9,8 @@ const requiredPermissions = (permissions = []) => {
         populate: {
           path: "permissions",
         },
-      });
-      
+      }).populate("permissions");
+
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }

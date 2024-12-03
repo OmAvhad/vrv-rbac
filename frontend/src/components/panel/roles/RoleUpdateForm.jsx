@@ -66,7 +66,7 @@ export default function RoleUpdateForm() {
 
   return (
     <>
-        <div className="flex flex-row justify-between mb-3 text-2xl">
+      <div className="flex flex-row justify-between mb-3 text-2xl">
         <h1>Roles</h1>
       </div>
       <form className="flex w-full flex-row gap-4" onSubmit={handleSubmit}>

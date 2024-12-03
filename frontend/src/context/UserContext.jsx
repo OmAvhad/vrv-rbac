@@ -8,7 +8,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     axiosInstance.get("/api/auth/me").then((res) => {
-        console.log(res.data);
+      console.log(res.data);
       setUserData(res.data);
     });
   }, []);
@@ -20,8 +20,17 @@ export const UserProvider = ({ children }) => {
     return userData?.roles.some((role) => role.name === roleName);
   };
 
+  const hasPermission = (permissionName) => {
+    if (!userData?.permissions) {
+      return false;
+    }
+    return userData?.permissions.some(
+      (permission) => permission.name === permissionName
+    );
+  };
+
   return (
-    <UserContext.Provider value={{ userData, setUserData, hasRole }}>
+    <UserContext.Provider value={{ userData, setUserData, hasRole, hasPermission }}>
       {children}
     </UserContext.Provider>
   );
