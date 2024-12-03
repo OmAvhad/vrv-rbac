@@ -5,15 +5,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { Table, Button } from "flowbite-react";
 import { UserContext } from "../../../context/UserContext";
 import { useContext } from "react";
+import { Spinner } from "flowbite-react";
 
 export default function ArticleList() {
   const [articles, setArticles] = useState([]);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const { hasRole } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let url = `${apiUrl}/api/articles/my`;
-    
+
     if (hasRole("admin") || hasRole("editor")) {
       url = `${apiUrl}/api/articles`;
     }
@@ -22,7 +25,7 @@ export default function ArticleList() {
       .get(url)
       .then((res) => {
         setArticles(res.data);
-        navigate("/dashboard/articles");
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -43,7 +46,7 @@ export default function ArticleList() {
         <Table.Body>
           {articles.map((article, index) => (
             <Table.Row key={article.id}>
-              <Table.Cell>{index}</Table.Cell>
+              <Table.Cell>{index+1}</Table.Cell>
               <Link to={`${article._id}`}>
                 <Table.Cell>{article.title}</Table.Cell>
               </Link>
@@ -61,6 +64,9 @@ export default function ArticleList() {
           ))}
         </Table.Body>
       </Table>
+      <div className="flex items-center justify-center p-10">
+        {loading && <Spinner size="lg" />}
+      </div>
     </>
   );
 }

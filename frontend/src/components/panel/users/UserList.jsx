@@ -3,19 +3,21 @@ import { useEffect, useState } from "react";
 import apiUrl from "../../../api";
 import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
-import { Button } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 import { useNavigate } from "react-router";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance
       .get(`${apiUrl}/api/users`)
-      .then((res) => {
+      .then(async (res) => {
         setUsers(res.data);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -36,7 +38,7 @@ export default function UserList() {
         <Table.Body>
           {users.map((user, index) => (
             <Table.Row key={user.id}>
-              <Table.Cell>{index}</Table.Cell>
+              <Table.Cell>{index+1}</Table.Cell>
               <Link to={`${user._id}`}>
                 <Table.Cell>{user.name}</Table.Cell>
               </Link>
@@ -46,6 +48,9 @@ export default function UserList() {
           ))}
         </Table.Body>
       </Table>
+      <div className="flex items-center justify-center p-10">
+        {loading && <Spinner size="lg"/>}
+      </div>
     </>
   );
 }
