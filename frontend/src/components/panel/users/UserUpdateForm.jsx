@@ -108,7 +108,7 @@ export default function UserUpdateFrom() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-start mt-12 w-full gap-2 ">
+      <div className="flex flex-col justify-start mt-14 w-full gap-2 ">
         <Button type="submit" className="w-2/6">
           Save
         </Button>

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { Label, TextInput, Button } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { UserContext } from "../../../context/UserContext";
+import { useContext } from "react";
 
 export default function ArticleUpdateForm() {
   const { id } = useParams();
@@ -14,6 +16,8 @@ export default function ArticleUpdateForm() {
   const [status, setStatus] = useState("");
   const [created_at, setCreatedAt] = useState("");
   const [updated_at, setUpdatedAt] = useState("");
+
+  const { hasRole } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -65,6 +69,7 @@ export default function ArticleUpdateForm() {
         status: "published",
       })
       .then(() => {
+        toast.success("Article published successfully", { autoClose: 2000 });
         navigate("/dashboard/articles");
       });
   };
@@ -72,7 +77,7 @@ export default function ArticleUpdateForm() {
   return (
     <>
       <div className="flex flex-row justify-between mb-3 text-2xl">
-        <h1>Permissions</h1>
+        <h1>Article</h1>
       </div>
       <div className="flex w-full flex-row gap-4">
         <div className="w-full">
@@ -112,22 +117,29 @@ export default function ArticleUpdateForm() {
             disabled
           />
         </div>
-        <div className="flex flex-col justify-start mt-8 w-full gap-2 ">
-          <Button type="submit" className="w-2/6" onClick={updateArticle}>
-            Save
-          </Button>
-          <Button
-            className="w-2/6 bg-red-800 text-white"
-            onClick={deleteArticle}
-          >
-            Delete
-          </Button>
-          <Button
-            className="w-2/6 bg-green-600 text-white"
-            onClick={publishArticle}
-          >
-            Publish
-          </Button>
+        <div className="flex flex-col justify-start mt-6 w-full gap-2 ">
+          {(hasRole("admin") || hasRole("editor")) && (
+            <>
+              <Button type="submit" className="w-2/6" onClick={updateArticle}>
+                Save
+              </Button>
+              <Button
+                className="w-2/6 bg-green-600 text-white"
+                onClick={publishArticle}
+              >
+                Publish
+              </Button>
+            </>
+          )}
+
+          {hasRole("admin") && (
+            <Button
+              className="w-2/6 bg-red-800 text-white"
+              onClick={deleteArticle}
+            >
+              Delete
+            </Button>
+          )}
         </div>
       </div>
     </>

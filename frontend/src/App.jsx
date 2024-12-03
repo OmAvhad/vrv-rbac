@@ -19,6 +19,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { UserProvider } from "./context/UserContext";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -36,11 +37,20 @@ function App() {
             path="/dashboard/*"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <UserProvider>
+                  <Dashboard />
+                </UserProvider>
               </ProtectedRoute>
             }
           >
-            <Route index element={<div>Welcome to the Dashboard</div>} />
+            <Route
+              index
+              element={
+                <div className="flex items-center justify-center text-4xl h-[500px]">
+                  Welcome to the Dashboard!
+                </div>
+              }
+            />
             <Route path="users" element={<UsersList />} />
             <Route path="users/add" element={<UserCreateFrom />} />
             <Route path="users/:id" element={<UserUpdateForm />} />

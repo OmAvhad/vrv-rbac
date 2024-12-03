@@ -3,15 +3,24 @@ import { useEffect, useState } from "react";
 import apiUrl from "../../../api";
 import { Link, useNavigate } from "react-router-dom";
 import { Table, Button } from "flowbite-react";
+import { UserContext } from "../../../context/UserContext";
+import { useContext } from "react";
 
 export default function ArticleList() {
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
+  const { hasRole } = useContext(UserContext);
+
   useEffect(() => {
+    let url = `${apiUrl}/api/articles/my`;
+    
+    if (hasRole("admin") || hasRole("editor")) {
+      url = `${apiUrl}/api/articles`;
+    }
+
     axiosInstance
-      .get(`${apiUrl}/api/articles`)
+      .get(url)
       .then((res) => {
-        console.log(res);
         setArticles(res.data);
         navigate("/dashboard/articles");
       })
@@ -38,7 +47,13 @@ export default function ArticleList() {
               <Link to={`${article._id}`}>
                 <Table.Cell>{article.title}</Table.Cell>
               </Link>
-              <Table.Cell className={article.status === 'published' ? 'text-green-500' : 'text-gray-500'}>
+              <Table.Cell
+                className={
+                  article.status === "published"
+                    ? "text-green-500"
+                    : "text-gray-500"
+                }
+              >
                 {article.status}
               </Table.Cell>
               <Table.Cell>{article.author.name}</Table.Cell>
