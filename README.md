@@ -26,7 +26,7 @@ This project is a simple implementation of Role-Based Access Control (RBAC) for 
 
 ## Example Use Case: CMS for a News Website
 
-In this case, a CMS is used by a news agency to manage articles, ediors, authors and more. Different roles would have different access permissions. Some example roles might include:
+In this case, a CMS is used by a news agency to manage articles, editors, authors and more. Different roles would have different access permissions. Some example roles might include:
 
 ### Admin
 - Full access to all content, users, and settings.
