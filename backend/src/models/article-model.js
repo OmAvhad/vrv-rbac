@@ -19,7 +19,7 @@ const articleSchema = new mongoose.Schema({
     enum: ["draft", "published"],
     default: "draft",
   },
-  createdAt: {
+  created_at: {
     type: Date,
     default: Date.now,
   },

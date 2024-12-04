@@ -73,7 +73,9 @@ export const updateArticle = async (req, res) => {
     article.title = req.body.title;
     article.content = req.body.content;
 
-    const data = await article.save();
+    // Update updated_at field
+    article.updated_at = Date.now();
+    await article.save();
 
     // Log article update
     logAction("UPDATE", "ARTICLE", article._id, req.user.id, { article });

@@ -24,6 +24,7 @@ export default function ArticleList() {
     axiosInstance
       .get(url)
       .then((res) => {
+        console.log(res);
         setArticles(res.data);
         setLoading(false);
       })
@@ -40,6 +41,7 @@ export default function ArticleList() {
         <Table.Head>
           <Table.HeadCell>ID</Table.HeadCell>
           <Table.HeadCell>Title</Table.HeadCell>
+          <Table.HeadCell>Created At</Table.HeadCell>
           <Table.HeadCell>Status</Table.HeadCell>
           <Table.HeadCell>Author</Table.HeadCell>
         </Table.Head>
@@ -50,6 +52,9 @@ export default function ArticleList() {
               <Link to={`${article._id}`}>
                 <Table.Cell>{article.title}</Table.Cell>
               </Link>
+              <Table.Cell>
+              {new Date(article.created_at).toLocaleString()}
+              </Table.Cell>
               <Table.Cell
                 className={
                   article.status === "published"

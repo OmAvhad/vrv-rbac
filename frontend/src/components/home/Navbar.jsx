@@ -14,9 +14,6 @@ export function CustomNav() {
         <Navbar.Link href="#" active>
           Home
         </Navbar.Link>
-        <Navbar.Link as={Link} href="#">
-          About
-        </Navbar.Link>
         <Navbar.Link href="/register">Register</Navbar.Link>
         <Navbar.Link href="/login">Login</Navbar.Link>
       </Navbar.Collapse>
