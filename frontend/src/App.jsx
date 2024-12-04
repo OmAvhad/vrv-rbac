@@ -15,6 +15,7 @@ import PermissionUpdateForm from "./components/panel/permissions/PermissionUpdat
 import ArticleList from "./components/panel/articles/ArticleList";
 import ArticleCreateForm from "./components/panel/articles/ArticleCreateForm";
 import ArticleUpdateForm from "./components/panel/articles/ArticleUpdateForm";
+import HomePanel from "./components/panel/HomePanel";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -43,14 +44,7 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route
-              index
-              element={
-                <div className="flex items-center justify-center text-4xl h-[500px]">
-                  Welcome to the Dashboard!
-                </div>
-              }
-            />
+            <Route index element={<HomePanel />} />
             <Route path="users" element={<UsersList />} />
             <Route path="users/add" element={<UserCreateFrom />} />
             <Route path="users/:id" element={<UserUpdateForm />} />

@@ -6,6 +6,7 @@ import articleRoutes from "./routes/article-router.js";
 import roleRoutes from "./routes/role-router.js";
 import permissionRoutes from "./routes/permission-router.js";
 import userRoutes from "./routes/user-router.js";
+import logRoutes from "./routes/log-router.js";
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use("/api/articles", articleRoutes);
 app.use("/api/roles", roleRoutes);
 app.use("/api/permissions", permissionRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/logs", logRoutes);
 
 export default app;

@@ -28,7 +28,7 @@ export default function Home() {
                   {article.title}
                 </h5>
                 <h6 className="text-md text-gray-500 dark:text-gray-400">
-                  {new Date(article.created_at).toLocaleDateString()}
+                  {new Date(article.createdAt).toLocaleDateString()}
                 </h6>
               </div>
               <h5>

@@ -1,5 +1,6 @@
 import User from "../models/user-model.js";
 import bcrypt from "bcrypt";
+import { logAction } from "../utils/log-action.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -11,6 +12,9 @@ export const createUser = async (req, res) => {
 
     // Create user
     await user.save();
+
+    // Log user creation
+    logAction("CREATE", "USER", user._id, req.user.id, { user });
 
     res.status(201).send(user);
   } catch (error) {
@@ -30,6 +34,7 @@ export const getUsers = async (req, res) => {
 export const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+
     if (!user) {
       return res.status(404).send();
     }
@@ -43,9 +48,14 @@ export const getUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
+
     if (!user) {
       return res.status(404).send();
     }
+
+    // Log user deletion
+    logAction("DELETE", "USER", user._id, req.user.id, { user });
+
     res.status(200).send(user);
   } catch (error) {
     res.status;
@@ -58,9 +68,14 @@ export const updateUser = async (req, res) => {
       new: true,
       runValidators: true,
     });
+
     if (!user) {
       return res.status(404).send();
     }
+
+    // Log user update
+    logAction("UPDATE", "USER", user._id, req.user.id, { user });
+
     res.status(200).send(user);
   } catch (error) {
     res.status;

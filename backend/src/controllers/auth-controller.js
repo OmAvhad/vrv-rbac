@@ -1,6 +1,7 @@
 import User from "../models/user-model.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../utils/jwt.js";
+import { logAction } from "../utils/log-action.js";
 
 export async function register(req, res) {
   const { name, email, password } = req.body;
@@ -15,6 +16,10 @@ export async function register(req, res) {
 
     // Create user
     const user = await User.create({ name, email, password: passwordHash });
+
+    // Log user creation
+    logAction("CREATE", "USER", user._id, req.user.id, { user });
+
     const token = generateToken(user);
 
     return res.status(201).json({ token });
