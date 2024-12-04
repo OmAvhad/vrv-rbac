@@ -2,11 +2,11 @@ import axiosInstance from "../../../config/AxiosSetup";
 import { useEffect, useState } from "react";
 import apiUrl from "../../../api";
 import { Table, Spinner } from "flowbite-react";
-import ReactJson from "react-json-view";
+import JsonView from "@uiw/react-json-view";
 
 export default function LogList() {
   const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axiosInstance
@@ -37,7 +37,9 @@ export default function LogList() {
           {logs.map((log, index) => (
             <Table.Row key={log.id}>
               <Table.Cell>{index + 1}</Table.Cell>
-              <Table.Cell>{new Date(log.createdAt).toLocaleString()}</Table.Cell>
+              <Table.Cell>
+                {new Date(log.createdAt).toLocaleString()}
+              </Table.Cell>
               <Table.Cell
                 className={
                   log.action === "CREATE"
@@ -54,7 +56,7 @@ export default function LogList() {
               <Table.Cell>{log.entity}</Table.Cell>
               <Table.Cell>{log.actor.name}</Table.Cell>
               <Table.Cell>
-                <ReactJson src={log.details} theme="monkai" collapsed={true} name={false}/>
+                <JsonView value={log.details} collapsed={true} />
               </Table.Cell>
             </Table.Row>
           ))}
