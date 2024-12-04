@@ -27,6 +27,19 @@ export default function UserCreateFrom() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (
+      !/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)
+    ) {
+      toast.error(
+        "Password must be at least 8 characters, contain a number, a special character, and a capital letter",
+        {
+          autoClose: 2000,
+        }
+      );
+      return;
+    }
+
     axiosInstance
       .post(`${apiUrl}/api/users`, {
         name,

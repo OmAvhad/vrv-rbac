@@ -11,6 +11,16 @@ export async function register(req, res) {
   }
 
   try {
+    // check if password is at least 8 characters, contains a number, and a special character and capital letter
+    if (
+      !/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)
+    ) {
+      return res.status(400).json({
+        message:
+          "Password must be at least 8 characters, contain a number, a special character, and a capital letter",
+      });
+    }
+
     // Create password hash
     const passwordHash = await bcrypt.hash(password, 10);
 
@@ -18,12 +28,13 @@ export async function register(req, res) {
     const user = await User.create({ name, email, password: passwordHash });
 
     // Log user creation
-    logAction("CREATE", "USER", user._id, req.user.id, { user });
+    logAction("CREATE", "USER", user._id, user._id, { user });
 
     const token = generateToken(user);
 
     return res.status(201).json({ token });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ message: error.message });
   }
 }

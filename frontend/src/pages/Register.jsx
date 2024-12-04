@@ -19,11 +19,25 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // check if password is at least 8 characters, contains a number, and a special character and capital letter
+      if (
+        !/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)
+      ) {
+        toast.error(
+          "Password must be at least 8 characters, contain a number, a special character, and a capital letter",
+          {
+            autoClose: 2000,
+          }
+        );
+        return;
+      }
+
       const response = await axios.post(`${baseUrl}/api/auth/register`, {
         name,
         email,
         password,
       });
+
       login(response.data.token);
       navigate("/dashboard");
       toast.success("Login successful");

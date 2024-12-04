@@ -6,6 +6,18 @@ export const createUser = async (req, res) => {
   try {
     const user = new User(req.body);
 
+    // Check if password is at least 8 characters, contains a number, and a special character and capital letter
+    if (
+      !/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(
+        user.password
+      )
+    ) {
+      return res.status(400).send({
+        message:
+          "Password must be at least 8 characters, contain a number, a special character, and a capital letter",
+      });
+    }
+
     // Create password hash
     const passwordHash = await bcrypt.hash(user.password, 10);
     user.password = passwordHash;
