@@ -1,6 +1,17 @@
 # vrv-rbac
 Assignment: Role-Based Access Control (RBAC)
 
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Example Use Case: CMS for a News Website](#example-use-case-cms-for-a-news-website)
+    - [Admin](#admin)
+    - [Editor](#editor)
+    - [Author](#author)
+    - [Viewer](#viewer)
+- [Test Credentials](#test-credentials)
+- [Installation](#installation)
+- [Documentation](#documentation)
 
 ## Overview
 This project is a simple implementation of Role-Based Access Control (RBAC) for a Content Management System (CMS). The application is built using the MERN stack (MongoDB, Express, React, Node.js) and uses JSON Web Tokens (JWT) for authentication.
