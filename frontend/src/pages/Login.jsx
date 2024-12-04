@@ -71,6 +71,28 @@ export default function Login() {
             </h2>
           </div>
         </form>
+        <div className="flex items-start flex-col justify-start min-w-96 text-sm text-gray-500">
+          <h1 className="text-lg font-semibold text-center">Test Users</h1>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="mt-1">
+              <h3 className="font-semibold">Admin</h3>
+              <p>Email: omavhad22@gmail.com</p>
+              <p>Password: rbacPassword@1</p>
+            </div>
+            <div className="mt-1">
+              <h3 className="font-semibold">Editor</h3>
+              <p>Email: editor@gmail.com</p>
+              <p>Password: rbacPassword@1</p>
+            </div>
+            <div className="mt-1">
+              <h3 className="font-semibold">Author</h3>
+              <p>Email: author1@gmail.com</p>
+              <p>Password: rbacPassword@1</p>
+              <p>Email: author2@gmail.com</p>
+              <p>Password: rbacPassword@1</p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
